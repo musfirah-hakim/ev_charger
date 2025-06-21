@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EV Charger Control</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .charger-box { border: 1px solid #ccc; padding: 20px; border-radius: 10px; width: 300px; }
+        button, input { margin-top: 10px; display: block; width: 100%; padding: 10px; }
+        .status-box { margin-top: 15px; background: #f1f1f1; padding: 10px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="charger-box">
+        <h2>Charger #1</h2>
+
+        <button onclick="startCharging()">Start Charging</button>
+        <button onclick="stopCharging()">Stop Charging</button>
+
+        <input type="number" id="voltage" placeholder="Set Voltage (V)">
+        <button onclick="setVoltage()">Apply Voltage</button>
+
+        <div class="status-box">
+            <strong>Status:</strong>
+            <span id="status">Loading...</span>
+        </div>
+    </div>
+
+    <script>
+        function fetchStatus() {
+            fetch('/api/status/')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('status').innerText = data.status;
+                })
+                .catch(error => {
+                    document.getElementById('status').innerText = 'Error fetching status';
+                });
+        }
+
+        function startCharging() {
+            alert("Start charging clicked (to be implemented)");
+        }
+
+        function stopCharging() {
+            alert("Stop charging clicked (to be implemented)");
+        }
+
+        function setVoltage() {
+            const voltage = document.getElementById('voltage').value;
+            alert(`Set voltage to ${voltage}V (to be implemented)`);
+        }
+
+        // Fetch status every 3 seconds
+        fetchStatus();
+        setInterval(fetchStatus, 3000);
+    </script>
+</body>
+</html>
